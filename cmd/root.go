@@ -4,6 +4,7 @@ import (
 	"cvedb-cli/cmd/create"
 	"cvedb-cli/cmd/delete"
 	"cvedb-cli/cmd/execute"
+	"cvedb-cli/cmd/export"
 	"cvedb-cli/cmd/get"
 	"cvedb-cli/cmd/list"
 	"cvedb-cli/cmd/output"
@@ -35,7 +36,7 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&util.ProjectName, "project", "", "Project name")
 	RootCmd.PersistentFlags().StringVar(&util.WorkflowName, "workflow", "", "Workflow name")
 
-	cobra.OnInitialize(util.CreateRequest, initVaultID)
+	cobra.OnInitialize(initVaultID)
 
 	RootCmd.AddCommand(list.ListCmd)
 	RootCmd.AddCommand(store.StoreCmd)
@@ -44,7 +45,7 @@ func init() {
 	RootCmd.AddCommand(output.OutputCmd)
 	RootCmd.AddCommand(execute.ExecuteCmd)
 	RootCmd.AddCommand(get.GetCmd)
-	// RootCmd.AddCommand(export.ExportCmd)
+	RootCmd.AddCommand(export.ExportCmd)
 }
 
 func initVaultID() {
